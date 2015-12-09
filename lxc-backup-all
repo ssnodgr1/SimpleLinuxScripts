@@ -68,7 +68,8 @@ do
 
 	# Make a tarball of the duplicate container
 	echo "Making tarball of clone"
-	tar czf "$DESTDIR/$f.$TODAY.tar.gz" -C "$TEMPDIR" "$f" > /dev/null 2>&1
+	mkdir "$DESTDIR/$TODAY"
+	tar czf "$DESTDIR/$TODAY/$f.$TODAY.tar.gz" -C "$TEMPDIR" "$f" > /dev/null 2>&1
 
 	# Remove duplicate container
 	echo "Cleaning up"
@@ -81,7 +82,7 @@ rm -rf "$TEMPDIR"
 
 echo "Removing these old backups (if you have any older than $DAYS days):"
 find "$DESTDIR" -name "*gz" -mtime +$DAYS -print
-find "$DESTDIR" -name "*gz" -mtime +$DAYS -exec rm {} \; >/dev/null 2>&1
+find "$DESTDIR" -mtime +$DAYS -type d -exec rm -rf {} \; >/dev/null 2>&1
 
 echo
 echo "All done!"
