@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo mount -t cifs -o username=noah,uid=noah,gid=noah,sec=ntlm //fileserver.drunkresearch.com/noah /mnt/fileserver-noah
+sudo mount -t cifs -o username=noah,uid=noah,gid=noah,sec=ntlm //fileserver.drunkresearch.com/home/noah /mnt/fileserver-noah
