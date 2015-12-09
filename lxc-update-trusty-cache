@@ -1,0 +1,5 @@
+#!/bin/bash
+rm -r /var/cache/lxc/trusty
+lxc-create -t ubuntu -n ubuntu-update
+lxc-destroy -n ubuntu-update
+

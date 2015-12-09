@@ -1,0 +1,12 @@
+#!/bin/bash
+if [ "$(id -u)" != "0" ]; then
+	sudo $0
+	exit 0
+fi
+apt-get update
+apt-get -y dist-upgrade
+apt-get -y --purge autoremove
+apt-get -y autoclean
+apt-get -y clean
+update-grub
+

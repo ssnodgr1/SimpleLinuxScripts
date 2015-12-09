@@ -1,0 +1,11 @@
+#!/bin/bash
+if [ "$(id -u)" != "0" ]; then
+        sudo $0
+        exit 0
+fi
+for snapshot in `zfs list -H -t snapshot | cut -f 1 | grep tank`
+do
+	echo "$snapshot"
+	zfs destroy "$snapshot"
+done
+

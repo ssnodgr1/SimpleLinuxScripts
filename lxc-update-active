@@ -1,0 +1,17 @@
+#!/bin/bash
+if [ "$(id -u)" != "0" ]; then
+	sudo $0
+	exit 0
+fi
+#list=`lxc-ls -f | grep RUNNING | cut -d' ' -f1`
+list=`lxc-ls -1 --running`
+for f in $list
+do
+	echo $f
+	lxc-attach -n "$f" -- apt-get update
+	lxc-attach -n "$f" -- apt-get -y dist-upgrade
+	lxc-attach -n "$f" -- apt-get -y --purge autoremove
+	lxc-attach -n "$f" -- apt-get -y autoclean
+	lxc-attach -n "$f" -- apt-get -y clean
+done
+
