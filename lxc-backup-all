@@ -46,6 +46,8 @@ list=`lxc-ls -1`
 TODAY=`date +%Y-%m-%d.%H%M`
 rm -rf "$TEMPDIR" > /dev/null 2>&1
 mkdir "$TEMPDIR" > /dev/null 2>&1
+mkdir "$DESTDIR/$TODAY" > /dev/null 2>&1
+
 echo
 
 for f in $list
@@ -68,7 +70,8 @@ do
 
 	# Make a tarball of the duplicate container
 	echo "Making tarball of clone"
-	mkdir "$DESTDIR/$TODAY"
+	CONFIGFILE=`lxc-info -n "$f" -c lxc.rootfs | cut -d' ' -f 3`/../config
+	cp "$CONFIGFILE" "$TEMPDIR/$f"
 	tar czf "$DESTDIR/$TODAY/$f.$TODAY.tar.gz" -C "$TEMPDIR" "$f" > /dev/null 2>&1
 
 	# Remove duplicate container
