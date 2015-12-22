@@ -17,6 +17,7 @@ fi
 
 
 # Here's some user variables to set up... the most important one
+#
 # is DESTDIR... this is where your tarballs end up. Please make a
 # new directory for this. You might very well lose some old tarballs
 # when the old backup removal runs.
